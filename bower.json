@@ -1,0 +1,17 @@
+{
+  "name": "kylepermuy.com",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Kyle Permuy <kyle@varninja.com>"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
