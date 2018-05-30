@@ -20,5 +20,8 @@
     "gulp": "^3.9.1",
     "gulp-clean-css": "^3.9.3",
     "gulp-sass": "^3.2.1"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.24.4"
   }
 }

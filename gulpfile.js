@@ -1,20 +1,34 @@
 'use strict';
 
-let gulp = require('gulp')
-let sass = require('gulp-sass')
-let cleanCSS = require('gulp-clean-css')
+const gulp = require('gulp')
+const sass = require('gulp-sass')
+const cleanCSS = require('gulp-clean-css')
+const browserSync = require('browser-sync').create()
 
-var cssSources = [
-  'src/css/*.scss',
-  'bower_components/bootstrap/scss/bootstrap.scss'
-];
+const cssSources = [
+  'src/css/*.scss'
+]
+//'bower_components/bootstrap/scss/bootstrap.scss'
 
-var compileSass = () => {
+gulp.task('sass', () => {
   return gulp.src(cssSources)
     .pipe(sass().on('error', sass.logError))
     .pipe(cleanCSS())
     .pipe(gulp.dest('./assets/css'))
-};
+})
 
-gulp.task('compileSass', compileSass)
-gulp.task('default', compileSass)
+gulp.task('build', [])
+
+gulp.task('watch', ['build'], () => {
+  browserSync.init({
+    server: {
+      baseDir: './',
+      open: 'external',
+      port: 3000,
+    }
+  })
+  gulp.watch('src/css/*.scss', ['sass'])
+  gulp.watch('src/js/*.ts', ['tscript'])
+})
+
+gulp.task('default', ['watch'])

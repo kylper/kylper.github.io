@@ -1,3 +1,80 @@
+/**
+ * Site-wide Mixins.
+ * Reusable patterns that apply to many different portions of the stylesheet.
+ **/
+
+@mixin keyframes($animation-name) {
+  @-webkit-keyframes #{$animation-name} {
+    @content;
+  }
+  @-moz-keyframes #{$animation-name} {
+    @content;
+  }
+  @-ms-keyframes #{$animation-name} {
+    @content;
+  }
+  @-o-keyframes #{$animation-name} {
+    @content;
+  }
+  @keyframes #{$animation-name} {
+    @content;
+  }
+}
+
+@mixin animation($str) {
+  -webkit-animation: #{$str};
+  -moz-animation: #{$str};
+  -ms-animation: #{$str};
+  -o-animation: #{$str};
+  animation: #{$str};
+}
+
+/**
+ * Site-wide style variables
+ *
+ * Includes:
+ * - Font
+ * - Colors
+ * - Gradients
+ * - Animations
+ * - Element Sizing
+ **/
+
+$font: 'Helvetica Neue', sans-serif;
+$font-size: 14px;
+
+$color-primary:       #B700FF;
+$color-primary-dark:  #610084;
+$color-magenta:       #B30090;
+$color-magenta-dark:  #5B0049;
+$color-blue:          #007AB3;
+$color-blue-dark:     #003E5A;
+$color-dark:          #2A202A;
+$color-light:         #FFFAFF;
+
+$gradient-top:
+  radial-gradient(ellipse at left, $color-magenta -50%, transparent),
+  radial-gradient(ellipse at right, $color-blue 0%, transparent);
+$gradient-magenta: linear-gradient($color-magenta, $color-primary) 10;
+$gradient-blue: linear-gradient($color-blue, $color-primary) 100;
+
+@include keyframes(bkgColor) {
+  0% {
+    background-color: $color-primary-dark
+  }
+  50% {
+    background-color: $color-blue-dark
+  }
+  100% {
+    background-color: $color-magenta-dark
+  }
+}
+
+$header-height: 200px;
+
+/*
+ * Default Classes
+ */
 body {
   height: 100%;
   width: 100%;
@@ -5,36 +82,71 @@ body {
   margin: 0;
   padding: 0;
   border: 0;
-  display: block;
   text-align: center;
+  background: $color-light;
+  color: $color-dark;
+  font-size: $font-size;
+  font-family: $font;
 }
+
+/*
+ * Default link style, for use on default background which is light color
+ */
 a {
-  color: inherit;
+  color: $color-primary;
 }
 a:hover, a:visited {
   text-decoration: none;
 }
+
+/*
+ * Website Top Header classes
+ */
+
 .header {
   display: block;
-  width: 100%;
-  background: #392F62;
-  background: linear-gradient(#392F62, #302E60);
-  color: white;
-  margin-bottom: 10px;
+  min-height: $header-height;
+  height: auto;
+  background-color: $color-dark;
+
+  &-container {
+    background: $gradient-top;
+    color: $color-light;
+    text-align: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    min-height: ($header-height - 80px);
+    height: auto;
+  }
+
+  &--fullscreen {
+    height: 100vh;
+
+    @include animation('bkgColor 5s linear 1s infinite alternate');
+
+    &-container {
+      padding-top: 40vh;
+    }
+  }
+  &--icon {
+    height: 100px;
+    display: inline-block;
+    vertical-align: middle;
+    padding: 10px 20px;
+  }
+  &--text {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1rem;
+    padding-top: 5px;
+    text-align: left;
+  }
 }
-.header-icon {
-  height: 100px;
-  display: inline-block;
-  vertical-align: middle;
-  padding: 10px 20px;
-}
-.header-displaytext {
-  display: inline-block;
-  vertical-align: middle;
-  line-height: 1rem;
-  padding-top: 5px;
-  text-align: left;
-}
+
+/*
+ * Navigation menu classes
+ */
+/*
 .nav {
   top: 0;
   position: -webkit-sticky;
@@ -44,41 +156,62 @@ a:hover, a:visited {
   vertical-align: top;
   background: linear-gradient(rgba(255,255,255,1), rgba(255,255,255,0.9), rgba(255,255,255,0.8), rgba(255,255,255,0));
   color: black;
-  /* border-bottom: 1px solid black; */
   padding: 0px 25px 35px;
   margin-bottom: 20px;
   z-index: 1000;
+
+  &-row {
+    width: 100vw;
+  }
+
+  &--name {
+    display: block;
+    font-weight: 200;
+    color: #392F62;
+  }
+  &--icon {
+    max-height: 60px;
+    padding: 10px;
+    color: #392F62;
+  }
 }
-.nav-customicon {
-  max-height: 60px;
-  padding: 10px;
-  color: #392F62;
-}
-.nav-name {
-  display: block;
-  font-weight: 200;
-  color: #392F62;
-}
-.nav-row {
-  width: 100vw;
-}
+*/
+
+/*
+ * Website section classes
+ */
 .section {
   padding: 50px 25px;
   color: #392F62;
+
+  &-space-killer {
+    margin-top: -50px;
+  }
+  &-header-image {
+    padding: 20px;
+    height: 120px;
+  }
 }
-.section-space-killer {
-  margin-top: -50px;
-}
-.section-header-image {
-  padding: 20px;
-  height: 120px;
-}
+
+/*
+ * Card
+ * Used to display small bits of text and media side by side in a row.
+ */
 .card {
+  border: 2px solid;
   margin: 20px 0px;
-  border-radius: 8px;
-}
-.skill-card {
-  color: #ddd;
-  /* background-color: #392F62; */
-  background: linear-gradient(rgb(57, 47, 98), rgb(32, 26, 56));
+
+  &-row {
+
+  }
+
+  &--type-skill {
+    border-image: $gradient-magenta;
+  }
+  &--type-work {
+    color: #ddd;
+    /* background-color: #392F62; */
+    border-image: $gradient-blue;
+  }
+
 }

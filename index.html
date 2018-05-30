@@ -7,38 +7,39 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <!-- <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"> -->
-  <link rel="stylesheet" href="assets/css/bootstrap.css">
+  <!-- <link rel="stylesheet" href="assets/css/bootstrap.css"> -->
   <link rel="stylesheet" href="assets/css/site.css">
 </head>
 <body>
-  <div class="jumbotron jumbotron-fluid header">
-    <div class="container" style="text-align: center;">
-      <img class="header-icon" src="./assets/icons/code.png">
-      <span class="header-displaytext">
-        <h1 class="display-4">Hi, I'm Kyle.</h1>
-        <p class="lead">Freelance web design and developement contractor.</p>
+  <div class="header"> <!-- Add class "header--fullscreen" for filled header -->
+    <div class="header-container"> <!-- replace w/ class "header--fullscreen-container" -->
+      <img class="header--icon" src="./assets/icons/code.png">
+      <span class="header--text">
+        <h1 class="display-4">Kyle Permuy</h1>
+        <p class="lead">Putting the testing! in development</p>
       </span>
     </div>
   </div>
 
-  <div class="nav navbar">
-    <div class="container">
-      <div class="row nav-row">
+  <div class="nav"></div>
+
+<!--
+      <div class="nav-row">
         <div class="col-4 col-sm-4"><a href="#skills">
-          <img class="nav-customicon" src="./assets/icons/flask.svg" alt="Skills">
+          <img class="nav--icon" src="./assets/icons/flask.svg" alt="Skills">
           <p class="nav-name">Skills</p>
         </a></div>
         <div class="col-4 col-sm-4"><a href="#work">
-          <img class="nav-customicon" src="./assets/icons/clock.svg" alt="Past Work">
+          <img class="nav--icon" src="./assets/icons/clock.svg" alt="Past Work">
           <p class="nav-name">Work</p>
         </a></div>
         <div class="col-4 col-sm-4"><a href="#contact">
-          <img class="nav-customicon" src="./assets/icons/messages.svg" alt="Contact Me">
+          <img class="nav--icon" src="./assets/icons/messages.svg" alt="Contact Me">
           <p class="nav-name">Contact</p>
         </a></div>
       </div>
     </div>
-  </div>
+  -->
 
   <div class="section container section-space-killer" id="skills">
 
@@ -48,15 +49,15 @@
 
     <div class="row">
       <div class="col-sm-4">
-        <div class="card">
+        <div class="card card--type-skill">
           <div class="card-body">
-            <h5 class="card-title">UI Design</h5>
-            <p class="card-text">Sharp graphic design for branding, websites, and app user interfaces. Design consulting comes with app development.</p>
+            <h5 class="card-title">UI Design Consulting</h5>
+            <p class="card-text">Sharp graphic design for branding, websites, and app user interfaces.</p>
           </div>
         </div>
       </div>
       <div class="col-sm-4">
-        <div class="card">
+        <div class="card card--type-skill">
           <div class="card-body">
             <h5 class="card-title">Web Development</h5>
             <p class="card-text">Full-stack web development. Everything from basic e-commerce websites, to advanced custom web applications.</p>
@@ -64,7 +65,7 @@
         </div>
       </div>
       <div class="col-sm-4">
-        <div class="card">
+        <div class="card card--type-skill">
           <div class="card-body">
             <h5 class="card-title">App Development</h5>
             <p class="card-text">Ionic Framework / React Native phone apps, or depending on the project, native Swift Apps for iPhone.</p>
@@ -83,7 +84,7 @@
 
     <div class="row">
       <div class="col-sm-4">
-        <div class="card skill-card">
+        <div class="card card--type-work">
           <div class="card-body">
             <div style="height: 100px;"></div>
             <h5 class="card-title">West of the Pond</h5>
@@ -95,7 +96,7 @@
         </div>
       </div>
       <div class="col-sm-4">
-        <div class="card skill-card">
+        <div class="card card--type-work">
           <div class="card-body">
             <div style="height: 100px;"></div>
             <h5 class="card-title">Casavant Project</h5>
@@ -108,7 +109,7 @@
         </div>
       </div>
       <div class="col-sm-4">
-        <div class="card skill-card">
+        <div class="card card--type-work">
           <div class="card-body">
             <div style="height: 100px;"></div>
             <h5 class="card-title">Forward Philly</h5>
@@ -121,7 +122,7 @@
         </div>
       </div>
       <div class="col-sm-4">
-        <div class="card skill-card">
+        <div class="card card--type-work">
           <div class="card-body">
             <div style="height: 100px;"></div>
             <h5 class="card-title">Jarvus Innovations</h5>
@@ -132,7 +133,7 @@
         </div>
       </div>
       <div class="col-sm-4">
-        <div class="card skill-card">
+        <div class="card card--type-work">
           <div class="card-body">
             <div style="height: 100px;"></div>
             <h5 class="card-title">VoteWise</h5>
@@ -143,7 +144,7 @@
         </div>
       </div>
       <div class="col-sm-4">
-        <div class="card skill-card">
+        <div class="card card--type-work">
           <div class="card-body">
             <div style="height: 100px;"></div>
             <h5 class="card-title">Pinelands Music Festival</h5>
