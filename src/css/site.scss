@@ -10,12 +10,6 @@
   @-moz-keyframes #{$animation-name} {
     @content;
   }
-  @-ms-keyframes #{$animation-name} {
-    @content;
-  }
-  @-o-keyframes #{$animation-name} {
-    @content;
-  }
   @keyframes #{$animation-name} {
     @content;
   }
@@ -24,8 +18,6 @@
 @mixin animation($str) {
   -webkit-animation: #{$str};
   -moz-animation: #{$str};
-  -ms-animation: #{$str};
-  -o-animation: #{$str};
   animation: #{$str};
 }
 
@@ -40,53 +32,76 @@
  * - Element Sizing
  **/
 
-$font: 'Helvetica Neue', sans-serif;
+@import url('https://fonts.googleapis.com/css?family=Lato:300,400');
+$font: 'Lato', sans-serif;
 $font-size: 14px;
 
 $color-primary:       #B700FF;
 $color-primary-dark:  #610084;
 $color-magenta:       #B30090;
 $color-magenta-dark:  #5B0049;
+$color-magenta-light: #FEBCF1;
 $color-blue:          #007AB3;
 $color-blue-dark:     #003E5A;
+$color-blue-light:    #AEE0FE;
 $color-dark:          #2A202A;
 $color-light:         #FFFAFF;
 
 $gradient-top:
-  radial-gradient(ellipse at left, $color-magenta -50%, transparent),
-  radial-gradient(ellipse at right, $color-blue 0%, transparent);
-$gradient-magenta: linear-gradient($color-magenta, $color-primary) 10;
-$gradient-blue: linear-gradient($color-blue, $color-primary) 100;
+  radial-gradient(circle at left, $color-magenta-light -50%, transparent),
+  radial-gradient(circle at right, $color-blue-light -50%, transparent);
+$gradient-magenta: linear-gradient(0.9turn, $color-magenta 0%, $color-primary 100%);
+$gradient-blue: linear-gradient(0.9turn, $color-primary 0%, $color-blue 100%);
 
 @include keyframes(bkgColor) {
   0% {
-    background-color: $color-primary-dark
+    background-color: $color-light
   }
   50% {
-    background-color: $color-blue-dark
+    background-color: mix($color-primary, $color-light, 20%)
   }
   100% {
-    background-color: $color-magenta-dark
+    background-color: #fff;
   }
 }
 
 $header-height: 200px;
 
+$width-small: 320px;
+$width-medium: 760px;
+$width-large: 1000px;
+
 /*
  * Default Classes
  */
 body {
+  display: block;
   height: 100%;
   width: 100%;
   overflow-x: hidden;
   margin: 0;
   padding: 0;
   border: 0;
-  text-align: center;
   background: $color-light;
   color: $color-dark;
   font-size: $font-size;
   font-family: $font;
+}
+
+.site-container {
+  display: block;
+  width: $width-large;
+  margin: 0 auto;
+
+  @media screen and (min-width: $width-small) {
+    width: auto;
+  }
+  @media screen and (min-width: ($width-medium + 100px)) {
+    width: $width-medium;
+  }
+  @media screen and (min-width: ($width-large + 100px)) {
+    width: $width-large;
+  }
 }
 
 /*
@@ -94,27 +109,72 @@ body {
  */
 a {
   color: $color-primary;
+  text-decoration: none;
 }
 a:hover, a:visited {
-  text-decoration: none;
+  text-decoration: $color-primary-dark;
+}
+
+/*
+ * Navigation menu classes
+ */
+.nav {
+  position: absolute;
+  background-color: rgba(255,255,255,0.0);
+  height: 100px;
+  width: 100vw;
+  z-index: 10;
+
+  &-container {
+    @extend .site-container;
+    //border-bottom: 1px solid $color-primary-dark;
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    color: $color-primary-dark;
+  }
+  &-title {
+    height: 50px;
+    padding: 20px 10px;
+
+  }
+  &-list {
+    text-decoration: none;
+    list-style-type: none;
+    vertical-align: bottom;
+    padding: 20px 10px;
+
+    li {
+      font-weight: 300;
+      font-size: 1.4em;
+      display: inline;
+      padding: 5px;
+
+      a {
+        color: $color-primary-dark;
+      }
+      a:hover {
+        color: $color-primary;
+      }
+    }
+  }
 }
 
 /*
  * Website Top Header classes
  */
-
 .header {
   display: block;
   min-height: $header-height;
   height: auto;
-  background-color: $color-dark;
+  background-color: $color-light;
 
   &-container {
     background: $gradient-top;
     color: $color-light;
-    text-align: center;
-    padding-top: 40px;
-    padding-bottom: 40px;
+    // text-align: center;
+    // padding-top: 40px;
+    // padding-bottom: 40px;
     min-height: ($header-height - 80px);
     height: auto;
   }
@@ -122,11 +182,23 @@ a:hover, a:visited {
   &--fullscreen {
     height: 100vh;
 
-    @include animation('bkgColor 5s linear 1s infinite alternate');
+    @include animation('bkgColor 3s linear 1s infinite alternate');
 
     &-container {
       padding-top: 40vh;
+      height: 60vh;
+      padding-bottom: 0vh;
     }
+  }
+  &--icon-cluster-image {
+    background-image: url('../icons/icon-cluster.svg');
+    background-repeat: repeat-y;
+    background-size: cover;
+    right: 0;
+    width: 40vw;
+    height: 100vh;
+    z-index: 0;
+    position: absolute;
   }
   &--icon {
     height: 100px;
@@ -136,46 +208,13 @@ a:hover, a:visited {
   }
   &--text {
     display: inline-block;
-    vertical-align: middle;
-    line-height: 1rem;
-    padding-top: 5px;
+    line-height: 1.4em;
+    font-size: 3em;
+    font-weight: 300;
+    padding: 0 5px;
     text-align: left;
   }
 }
-
-/*
- * Navigation menu classes
- */
-/*
-.nav {
-  top: 0;
-  position: -webkit-sticky;
-  position: sticky;
-  height: auto;
-  width: 100%;
-  vertical-align: top;
-  background: linear-gradient(rgba(255,255,255,1), rgba(255,255,255,0.9), rgba(255,255,255,0.8), rgba(255,255,255,0));
-  color: black;
-  padding: 0px 25px 35px;
-  margin-bottom: 20px;
-  z-index: 1000;
-
-  &-row {
-    width: 100vw;
-  }
-
-  &--name {
-    display: block;
-    font-weight: 200;
-    color: #392F62;
-  }
-  &--icon {
-    max-height: 60px;
-    padding: 10px;
-    color: #392F62;
-  }
-}
-*/
 
 /*
  * Website section classes
@@ -184,6 +223,14 @@ a:hover, a:visited {
   padding: 50px 25px;
   color: #392F62;
 
+  &-container {
+    @extend .site-container;
+    padding: 20px 50px;
+    p {
+      line-height: 1.6em;
+      font-weight: 300;
+    }
+  }
   &-space-killer {
     margin-top: -50px;
   }
@@ -194,24 +241,44 @@ a:hover, a:visited {
 }
 
 /*
- * Card
+ * Cards
  * Used to display small bits of text and media side by side in a row.
  */
 .card {
-  border: 2px solid;
-  margin: 20px 0px;
+  display: flex;
+  justify-content: space-between;
 
-  &-row {
+  &-single {
+    width: 25%;
+    border: 2px solid $color-magenta-dark;
+    padding: 20px;
+    margin: 20px 0px;
+  }
 
+  &-body {
+    h1 {
+      font-weight: 100;
+    }
+    p {
+      font-weight: 400;
+    }
   }
 
   &--type-skill {
-    border-image: $gradient-magenta;
+    //border-image: $gradient-magenta;
   }
   &--type-work {
     color: #ddd;
     /* background-color: #392F62; */
-    border-image: $gradient-blue;
+    //border-image: $gradient-blue;
   }
 
+}
+
+/*
+ * Section specific styles
+ */
+#about {
+  background: $gradient-blue;
+  color: $color-light;
 }
