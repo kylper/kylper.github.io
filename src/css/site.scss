@@ -91,9 +91,9 @@ body {
 
 .site-container {
   display: block;
-  width: 100%;
   margin: 0 auto;
   padding: $left-right-padding;
+
 
   @media screen and (min-width: $width-medium + 50px) {
     width: $width-medium - $left-right-padding;
@@ -126,21 +126,30 @@ a:hover, a:visited {
 
   &-container {
     @extend .site-container;
-    //border-bottom: 1px solid $color-primary-dark;
     height: 100px;
     display: flex;
     justify-content: space-between;
     color: $color-primary-dark;
   }
   &-title {
-    height: 50px;
-    padding: 30px 0;
+    height: 40px;
+    padding: 0;
+
+    @media screen and (min-width: $width-medium) {
+      height: 50px;
+      padding: 30px 0;
+    }
   }
   &-list {
+    display: none;
     text-decoration: none;
     list-style-type: none;
     vertical-align: bottom;
     padding: 20px 10px;
+
+    @media screen and (min-width: $width-medium) {
+      display: flex;
+    }
 
     li {
       font-weight: 300;
@@ -154,24 +163,21 @@ a:hover, a:visited {
       a:hover {
         color: $color-primary;
       }
-
-      @media screen and (max-width: $width-medium) {
-        display: none;
-      }
     }
   }
   &-icon {
-    display: none;
+    display: block;
+    position: absolute;
     height: 45px;
     width: 40px;
-    margin: 38px 50px;
-    //padding: 25px;
+    margin: 0px 20px;
+    right: 0;
     background-image: url('../icons/menuicon.svg');
     background-repeat: no-repeat;
     background-size: contain;
 
-    @media screen and (max-width: $width-medium) {
-      display: inline;
+    @media screen and (min-width: $width-medium) {
+      display: none;
     }
   }
 }
@@ -181,40 +187,35 @@ a:hover, a:visited {
  */
 .header {
   display: block;
-  min-height: $header-height;
-  height: auto;
+  height: 100vh;
   background-color: $color-light;
+
+  @include animation('bkgColor 3s linear 1s infinite alternate');
 
   &-container {
     background: $gradient-top;
-    color: $color-light;
-    // text-align: center;
-    // padding-top: 40px;
-    // padding-bottom: 40px;
-    min-height: ($header-height - 80px);
-    height: auto;
-  }
-
-  &--fullscreen {
+    color: $color-magenta-dark;
     height: 100vh;
-
-    @include animation('bkgColor 3s linear 1s infinite alternate');
-
-    &-container {
-      padding-top: 35vh;
-      height: 65vh;
-      padding-bottom: 0vh;
-    }
   }
-  &--icon-cluster-image {
+  &-content {
+    @extend .site-container;
+    z-index: 3;
+    position: relative;
+  }
+
+  &--cluster-image {
     background-image: url('../icons/icon-cluster.svg');
     background-repeat: repeat-y;
     background-size: cover;
     right: 0;
-    width: 40vw;
+    width: 60vw;
     height: 100vh;
-    z-index: 0;
+    z-index: 2;
     position: absolute;
+
+    @media screen and (min-width: $width-medium) {
+      width: 40vw;
+    }
   }
   &--icon {
     height: 100px;
@@ -228,7 +229,12 @@ a:hover, a:visited {
     font-size: 3em;
     font-weight: 300;
     padding: 0 5px;
+    margin: 20vh 0 0 0;
     text-align: left;
+
+    @media screen and (min-width: $width-medium) {
+      margin: 35vh 0 0 0;
+    }
   }
 }
 
@@ -261,14 +267,23 @@ a:hover, a:visited {
  * Used to display small bits of text and media side by side in a row.
  */
 .card {
-  display: flex;
-  justify-content: space-between;
+  display: block;
+
+  @media screen and (min-width: $width-medium) {
+    display: flex;
+    justify-content: space-between;
+  }
 
   &-single {
-    width: 25%;
+    display: block;
     border: 2px solid $color-magenta-dark;
     padding: 20px;
     margin: 20px 0px;
+
+    @media screen and (min-width: $width-medium) {
+      width: 25%;
+      display: flex;
+    }
   }
 
   &-body {
