@@ -51,8 +51,10 @@ $color-light:         #FFFAFF;
 $gradient-top:
   radial-gradient(circle at left, $color-magenta-light -100%, transparent),
   radial-gradient(circle at right, $color-blue-light -100%, transparent);
-$gradient-magenta: linear-gradient(0.9turn, $color-magenta 0%, $color-primary 100%);
-$gradient-blue: linear-gradient(0.9turn, $color-primary 0%, $color-blue 100%);
+$gradient-magenta:
+  linear-gradient(0.9turn, $color-magenta 0%, $color-primary 100%);
+$gradient-blue:
+  linear-gradient(0.9turn, $color-primary 0%, $color-blue 100%);
 
 @include keyframes(bkgColor) {
   0% {
@@ -72,7 +74,7 @@ $gradient-blue: linear-gradient(0.9turn, $color-primary 0%, $color-blue 100%);
   }
 }
 
-$header-height: 200px;
+$header-height: 100vh;
 
 $width-medium: 800px;
 $width-large: 1000px;
@@ -127,7 +129,6 @@ a:hover, a:visited {
  */
 .nav {
   position: absolute;
-  background-color: rgba(255,255,255,0.0);
   height: 100px;
   width: 100vw;
   z-index: 10;
@@ -195,7 +196,7 @@ a:hover, a:visited {
  */
 .header {
   display: block;
-  height: 100vh;
+  height: $header-height;
   background-color: $color-light;
 
   @include animation('bkgColor 3s linear 1s infinite alternate');
@@ -203,7 +204,7 @@ a:hover, a:visited {
   &-container {
     background: $gradient-top;
     color: $color-primary-dark;
-    height: 100vh;
+    height: $header-height;
   }
   &-content {
     @extend .site-container;
@@ -258,13 +259,17 @@ a:hover, a:visited {
  * Website section classes
  */
 .section {
-  padding: $section-top-padding 25px;
+  padding: $section-top-padding $left-right-padding;
   color: #392F62;
   //overflow: hidden;
 
   &-container {
     @extend .site-container;
-    padding: 20px 0;
+    padding: 0;
+    h1 {
+      font-weight: 100;
+      letter-spacing: -0.5px;
+    }
     p {
       line-height: 1.6em;
       font-weight: 400;
@@ -308,7 +313,7 @@ a:hover, a:visited {
     @extend .card-single;
     @media screen and (min-width: $width-medium) {
       width: 25%;
-      display: flex;
+      display: block;
     }
   }
   &-body {
@@ -364,7 +369,7 @@ $about-picture-size: 260px;
 
   .section-container {
     text-align: center;
-    padding-top: ($section-top-padding * 2) + $about-picture-size;
+    padding-top: $section-top-padding + $about-picture-size;
 
     h1 {
       padding: 0px $left-right-padding;
@@ -403,6 +408,44 @@ $about-picture-size: 260px;
 #services {
   background-color: $color-dark;
   color: $color-light;
+
+  .section-container {
+    @media screen and (min-width: $width-medium) {
+      display: flex;
+    }
+  }
+
+  #vn-logo {
+    display: block;
+    padding: 20px;
+    height: 200px;
+    width: 200px;
+    margin: 0 auto;
+  }
+
+  button {
+    //border: 1px solid $color-primary-light;
+    //color: $color-primary-light;
+    background-color: $color-dark;
+    border: 1px solid #C0C0C0;
+    color: #C0C0C0;
+    font-weight: 100;
+    font-size: 1em;
+    margin: 20px 0;
+    padding: 14px;
+  }
+  button:hover {
+    //border-color: $color-blue-light;
+    //color: $color-blue-light;
+    border-color: #C0C0C0;
+    color: #C0C0C0;
+  }
+}
+
+#projects {
+  .card {
+    text-align: center;
+  }
 }
 
 /*
