@@ -38,6 +38,7 @@ $font-size: 14px;
 
 $color-primary:       #B700FF;
 $color-primary-dark:  #610084;
+$color-primary-light: #E6C6F6;
 $color-magenta:       #B30090;
 $color-magenta-dark:  #5B0049;
 $color-magenta-light: #FEBCF1;
@@ -48,8 +49,8 @@ $color-dark:          #2A202A;
 $color-light:         #FFFAFF;
 
 $gradient-top:
-  radial-gradient(circle at left, $color-magenta-light -50%, transparent),
-  radial-gradient(circle at right, $color-blue-light -50%, transparent);
+  radial-gradient(circle at left, $color-magenta-light -100%, transparent),
+  radial-gradient(circle at right, $color-blue-light -100%, transparent);
 $gradient-magenta: linear-gradient(0.9turn, $color-magenta 0%, $color-primary 100%);
 $gradient-blue: linear-gradient(0.9turn, $color-primary 0%, $color-blue 100%);
 
@@ -57,11 +58,17 @@ $gradient-blue: linear-gradient(0.9turn, $color-primary 0%, $color-blue 100%);
   0% {
     background-color: $color-light
   }
-  50% {
-    background-color: mix($color-primary, $color-light, 20%)
+  100% {
+    background-color: $color-primary-light;
+  }
+}
+
+@include keyframes(hovering) {
+  0% {
+    transform: translateY(0px);
   }
   100% {
-    background-color: #fff;
+    transform: translateY(6px);
   }
 }
 
@@ -71,6 +78,7 @@ $width-medium: 800px;
 $width-large: 1000px;
 
 $left-right-padding: 20px;
+$section-top-padding: 20px;
 
 /*
  * Default Classes
@@ -87,13 +95,13 @@ body {
   color: $color-dark;
   font-size: $font-size;
   font-family: $font;
+  font-weight: 400;
 }
 
 .site-container {
   display: block;
   margin: 0 auto;
   padding: $left-right-padding;
-
 
   @media screen and (min-width: $width-medium + 50px) {
     width: $width-medium - $left-right-padding;
@@ -161,7 +169,7 @@ a:hover, a:visited {
         color: $color-primary-dark;
       }
       a:hover {
-        color: $color-primary;
+        color: $color-primary-light;
       }
     }
   }
@@ -194,7 +202,7 @@ a:hover, a:visited {
 
   &-container {
     background: $gradient-top;
-    color: $color-magenta-dark;
+    color: $color-primary-dark;
     height: 100vh;
   }
   &-content {
@@ -214,14 +222,22 @@ a:hover, a:visited {
     position: absolute;
 
     @media screen and (min-width: $width-medium) {
-      width: 40vw;
+      width: 50vw;
     }
   }
-  &--icon {
-    height: 100px;
-    display: inline-block;
-    vertical-align: middle;
-    padding: 10px 20px;
+  &--cta {
+    height: 30px;
+    width: 44px;
+    margin: 90vh auto 0 auto;
+    display: block;
+    left: 0;
+    right: 0;
+    position: absolute;
+    background-image: url('../icons/continue.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    @include animation('hovering 1s linear 1s infinite alternate');
   }
   &--text {
     display: inline-block;
@@ -242,15 +258,16 @@ a:hover, a:visited {
  * Website section classes
  */
 .section {
-  padding: 50px 25px;
+  padding: $section-top-padding 25px;
   color: #392F62;
+  //overflow: hidden;
 
   &-container {
     @extend .site-container;
     padding: 20px 0;
     p {
       line-height: 1.6em;
-      font-weight: 300;
+      font-weight: 400;
     }
   }
   &-space-killer {
@@ -276,16 +293,24 @@ a:hover, a:visited {
 
   &-single {
     display: block;
-    border: 2px solid $color-magenta-dark;
-    padding: 20px;
     margin: 20px 0px;
+    padding: 20px;
+  }
+  &-single-fill {
+    @extend .card-single;
+    width: unset;
 
+    @media screen and (min-width: $width-medium) {
+      width: 100%;
+    }
+  }
+  &-single-tri {
+    @extend .card-single;
     @media screen and (min-width: $width-medium) {
       width: 25%;
       display: flex;
     }
   }
-
   &-body {
     h1 {
       font-weight: 100;
@@ -294,22 +319,109 @@ a:hover, a:visited {
       font-weight: 400;
     }
   }
-
-  &--type-skill {
-    //border-image: $gradient-magenta;
-  }
-  &--type-work {
-    color: #ddd;
-    /* background-color: #392F62; */
-    //border-image: $gradient-blue;
-  }
-
 }
 
 /*
  * Section specific styles
  */
+
+$about-picture-size: 260px;
+
+/**
+ * I'd like to explain this function quickly:
+ * My picture uses absolute positioning and "right: 0" to stay right.
+ * This solution sucks because the content area doesn't know what the
+ * picture boundaries are and content may start crossing under the picture.
+ * This function resizes the width of the content area, factoring in the size
+ * of the picture, and keeps it centered by translating it back to the left
+ * boundary of the current browser width. This is not be the optimal way to
+ * handle the CSS of the section or the picture, but it works. Just to note.
+ */
+@mixin about-section-size($screen-width) {
+  $_width: $screen-width - $left-right-padding - $about-picture-size;
+
+  width: $_width;
+  transform: translateX((($_width - $screen-width) / 2));
+}
+
 #about {
   background: $gradient-blue;
   color: $color-light;
+  margin-top: $section-top-padding * 2;
+  padding: 0px;
+
+  #facts {
+    &-card {
+      display: block;
+      min-height: 180px;
+      height: auto;
+      padding: $left-right-padding;
+    }
+    img {
+      width: 100px;
+    }
+  }
+
+  .section-container {
+    text-align: center;
+    padding-top: ($section-top-padding * 2) + $about-picture-size;
+
+    h1 {
+      padding: 0px $left-right-padding;
+    }
+
+    @media screen and (min-width: $width-medium) {
+      padding-top: $section-top-padding;
+      @include about-section-size($width-medium);
+      h1 { text-align: left; }
+    }
+    @media screen and (min-width: $width-large) {
+      @include about-section-size($width-large);
+    }
+  }
+
+  &-picture {
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    border: 2px solid $color-primary-light;
+    width: $about-picture-size;
+    height: $about-picture-size;
+    margin-top: -$section-top-padding;
+    margin-left: auto;
+    margin-right: auto;
+
+    @media screen and (min-width: $width-medium) {
+      margin-left: 0;
+      margin-right: $about-picture-size / 10;
+      left: unset;
+    }
+  }
+}
+
+#services {
+  background-color: $color-dark;
+  color: $color-light;
+}
+
+/*
+ * Footer style
+ */
+footer {
+  padding: 10px;
+  background-color: $color-dark;
+  color: $color-light;
+  a {
+    color: $color-primary-light
+  }
+  a:hover {
+    color: $color-light;
+  }
+  p {
+    display: block;
+    font-size: 0.85em;
+    text-align: center;
+    margin: 0 auto;
+  }
 }

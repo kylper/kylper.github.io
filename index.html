@@ -4,10 +4,21 @@
 
   <title>Kyle Permuy</title>
   <meta charset="utf-8">
+  <meta name="language" content="english">
+  <meta http-equiv="content-type" content="text/html">
+  <meta name="author" content="Kyle Permuy">
+  <meta name="no-email-collection" content="http://www.unspam.com/noemailcollection/">
+
+  <meta name="description" content="Contract web developer, now available for hire.">
+
+  <meta property="og:title" content="Kyle Permuy">
+  <meta property="og:description" content="Contract web developer, now available for hire.">
+  <meta property="og:image" content="http://kylepermuy.com/assets/img/ogpreview.png">
+  <meta property="og:url" content="http://kylepermuy.com">
+  <meta name="twitter:card" content="summary_large_image">
+
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <!-- <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css"> -->
-  <!-- <link rel="stylesheet" href="assets/css/bootstrap.css"> -->
   <link rel="stylesheet" href="assets/css/site.css">
 </head>
 <body>
@@ -16,7 +27,7 @@
       <img src="./assets/icons/title.svg" class="nav-title"></img>
       <ul class="nav-list">
         <li><a href="#services">services</a></li>
-        <li><a href="#portfolio">portfolio</a></li>
+        <li><a href="#projects">projects</a></li>
         <li><a href="#about">about</a></li>
         <li><a href="#contact">contact</a></li>
       </ul>
@@ -26,33 +37,33 @@
 
   <div class="header">
     <div class="header-container">
+      <a href="#services" class="header--cta"></a>
       <span class="header--cluster-image"></span>
       <div class="header-content">
-        <span class="header--text">
+        <div class="header--text">
           <p>Let's build something awesome,<br /><b>together.</b></p>
-        </span>
+        </div>
       </div>
-
     </div>
   </div>
 
   <div id="services" class="section">
     <div class="section-container">
-      <h1>Services</h1>
+      <img src="assets/img/vn-logo.png" width="200px" style="margin: 0 auto; display: block;" />
       <div class="card">
-        <div class="card-single card--type-skill">
+        <div class="card-single-tri">
           <div class="card-body">
             <h1>UI Design Consulting</h1>
             <p>Sharp graphic design for branding, websites, and app user interfaces.</p>
           </div>
         </div>
-        <div class="card-single card--type-skill">
+        <div class="card-single-tri">
           <div class="card-body">
             <h1>Web Development</h1>
             <p>Full-stack web development. Everything from basic e-commerce websites, to advanced custom web applications.</p>
           </div>
         </div>
-        <div class="card-single card--type-skill">
+        <div class="card-single-tri">
           <div class="card-body">
             <h1>App Development</h1>
             <p>Ionic Framework / React Native phone apps, or depending on the project, native Swift Apps for iPhone.</p>
@@ -62,26 +73,46 @@
     </div>
   </div>
 
-  <div id="portfolio" class="section">
+  <div id="projects" class="section">
     <div class="section-container">
-      <h1>Portfolio</h1>
+      <h1>Highlighted Projects</h1>
       <p>More content coming soon.</p>
     </div>
   </div>
 
   <div id="about" class="section">
+    <img id="about-picture" src="assets/img/portrait.jpg" />
     <div class="section-container">
-      <h1>About</h1>
-      <p>More content coming soon.</p>
+      <h1>Here is some info about me...</h1>
+
+      <div id="facts" class="card">
+        <span id="facts-card">
+          <img src="assets/icons/yrs-exp.svg" />
+          <p>More than three years of professional experience with web development.</p>
+        </span>
+        <span id="facts-card">
+          <img src="assets/img/tech-stack-white.png" />
+          <p>Working primarily using Node.js, Angular, and React.</p>
+        </span>
+        <span id="facts-card">
+          <img src="assets/icons/sharing.svg" />
+          <p>Assisting in organizing education-focused tech events in Philly.</p>
+        </span>
+      </div>
+
     </div>
   </div>
 
   <div id="contact" class="section">
     <div class="section-container">
-      <h1>Contact</h1>
+      <h1>Find me!</h1>
       <p>More content coming soon.</p>
     </div>
   </div>
+
+  <footer>
+    <p>Icons designed by <a href="https://thenounproject.com/tridentdesigns17/">Trident</a>. Made with &#x1F49C; in Philadelphia. </p>
+  </footer>
 
 <!--
   <div class="section site-container section-space-killer" id="skills">
@@ -219,6 +250,7 @@
   </div>
 
 -->
+
 
 </body>
 </html>
