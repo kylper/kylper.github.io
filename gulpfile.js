@@ -17,7 +17,7 @@ gulp.task('sass', () => {
     .pipe(gulp.dest('./assets/css'))
 })
 
-gulp.task('build', [])
+gulp.task('build', ['sass'])
 
 gulp.task('watch', ['build'], () => {
   browserSync.init({

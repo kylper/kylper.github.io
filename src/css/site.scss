@@ -442,9 +442,13 @@ $about-picture-size: 260px;
   }
 }
 
-#projects {
+#work {
   .card {
     text-align: center;
+
+    img {
+      max-width: 200px;
+    }
   }
 }
 

@@ -15,7 +15,7 @@
   "homepage": "https://github.com/kylper/kylper.github.io#readme",
   "dependencies": {
     "gulp": "^3.9.1",
-    "gulp-clean-css": "^3.9.3",
+    "gulp-clean-css": "^3.9.4",
     "gulp-sass": "^3.2.1"
   },
   "devDependencies": {
